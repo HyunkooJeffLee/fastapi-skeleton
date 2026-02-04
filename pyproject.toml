@@ -1,0 +1,51 @@
+[project]
+name = "fastapi-skeleton"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+  "common",
+  "internal-api",
+  "external-api",
+  "backoffice-api",
+  "ops-cli",
+]
+
+[build-system]
+requires = ["uv-build"]
+build-backend = "uv_build"
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["packages/*", "apps/*", "cli_apps/*"]
+
+[tool.uv.sources]
+common = { workspace = true }
+internal-api = { workspace = true }
+external-api = { workspace = true }
+backoffice-api = { workspace = true }
+ops-cli = { workspace = true }
+
+[dependency-groups]
+dev = [
+  "ruff",
+  "ty",
+  "pytest",
+  "pytest-asyncio",
+  "httpx",
+  "aiosqlite",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+fix = true
+
+[tool.ty]
+python-version = "3.14"
+
+[tool.pytest.ini_options]
+addopts = "-q"
+asyncio_mode = "auto"
+testpaths = ["tests"]

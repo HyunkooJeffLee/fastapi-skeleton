@@ -1,0 +1,14 @@
+[project]
+name = "common"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+  "sqlalchemy[asyncio]",
+  "alembic",
+  "pydantic",
+  "pydantic-settings",
+]
+
+[build-system]
+requires = ["uv-build"]
+build-backend = "uv_build"

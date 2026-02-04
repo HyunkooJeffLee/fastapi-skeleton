@@ -1,0 +1,22 @@
+[project]
+name = "backoffice-api"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+  "fastapi",
+  "uvicorn",
+  "typer",
+  "httpx",
+  "cryptography",
+  "common",
+]
+
+[tool.uv.sources]
+common = { workspace = true }
+
+[build-system]
+requires = ["uv-build"]
+build-backend = "uv_build"
+
+[project.scripts]
+backoffice-api = "backoffice_api.cli:app"
