@@ -2,7 +2,7 @@
 
 FastAPI 멀티 앱 모노레포 템플릿입니다. `uv` 워크스페이스로 구성되어 있으며 `common` 패키지를 공유합니다.
 
-> Production-oriented FastAPI monorepo template: uv workspace, one shared package, three API apps with per-app auth, single Alembic migration source, and batch/ops CLI apps.
+> FastAPI monorepo template on a uv workspace: one shared package, three API apps with per-app auth, a single Alembic migration source, and batch/ops CLI apps.
 
 ## 설계 의도
 
