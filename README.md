@@ -2,6 +2,18 @@
 
 FastAPI 멀티 앱 모노레포 템플릿입니다. `uv` 워크스페이스로 구성되어 있으며 `common` 패키지를 공유합니다.
 
+> Production-oriented FastAPI monorepo template: uv workspace, one shared package, three API apps with per-app auth, single Alembic migration source, and batch/ops CLI apps.
+
+## 설계 의도
+
+여러 API 앱(내부·외부·백오피스)이 도메인 모델과 인프라 코드를 공유하되,
+배포·인증·책임은 앱별로 분리되는 실무 구조를 템플릿화했습니다.
+
+- **uv 워크스페이스 모노레포** — `uv sync` 한 번으로 전체 의존성이 잡히고, 패키지 경계는 명시적 import로 강제합니다(암묵적 re-export 금지).
+- **단일 마이그레이션 소스** — Alembic을 `common`에 하나만 두고, 앱 전용 모델은 `ALEMBIC_MODEL_MODULES` 환경변수로 명시적으로 등록합니다. 로딩 실패는 침묵하지 않고 중단합니다.
+- **앱별 인증 분리** — internal/external은 API Key, backoffice는 Google OAuth(토큰 암호화 저장). 인증 방식이 앱 경계와 함께 갑니다.
+- **운영 기본기 내장** — `/liveness`·`/readiness`(DB 체크 포함), 트랜잭션 커밋/롤백 패턴을 갖춘 배치 템플릿, 대규모 배치·컨슈머용 별도 CLI 앱 계층(`cli_apps`).
+
 ## 구조
 ```
 .
